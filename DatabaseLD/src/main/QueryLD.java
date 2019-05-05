@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.Date;
 
@@ -133,26 +134,37 @@ public class QueryLD {
 		 */
 		while(!quit) {
 			System.out.println("\n\n*****JJT LD Database Java Query Runner*****\n\n");
-			System.out.println("Please enter a query number (1-28): ");
+			System.out.println("Please enter a query number (13-28) or 0 to QUIT: ");
 			// give user choice option
-			int choice = scanner.nextInt();
-			if (choice == 13) {
-				// Query 13 runner
-				System.out.println("Running Query 13:");
-				System.out.println("Given a person’s identifier, find all the jobs this person is currently holding and worked\n" + 
-						"in the past.");
-				System.out.print("Enter a person's ID: ");
-				String ans = getAnswer();
-				ArrayList<String[]> str = sqObj.workerJob(ans);
-				for (String[] line : str) {
-					System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+			try {
+				int choice = scanner.nextInt();
+				
+				if (choice < 13) {
+					System.out.println("ERROR: You have entered the value below the given range!");
 				}
+				else if (choice == 13) {
+					// Query 13 runner
+					System.out.println("Running Query 13:");
+					System.out.println("Given a person’s identifier, find all the jobs this person is currently holding and worked\n" + 
+							"in the past.");
+					System.out.print("Enter a person's ID: ");
+					String ans = getAnswerString();
+					ArrayList<String[]> str = sqObj.workerJob(ans);
+					for (String[] line : str) {
+						System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+					}
+				}
+				else if (choice == 0) {
+					quit = true;
+					scanner.close();
+				}
+				
+			} catch (InputMismatchException e) {
+				System.out.println("ERROR: the value must be an integer\n");
+				e.printStackTrace();
 			}
-			else if (choice == 0) {
-				quit = true;
-			}
-			scanner.close();
-			quit = true;
+//			QUITS WHILE LOOP
+//			quit = true;
 		}
 		
 //		// Query 13 runner
@@ -167,15 +179,13 @@ public class QueryLD {
 //			System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
 //					line[0], line[1], line[2], line[3], line[4]);
 //		}
-	
-		
-		
-		
-		
 	}
 	
-	
-	public static String getAnswer() {
+	/**
+	 * 
+	 * @return answer: which is the user input to the query as String
+	 */
+	public static String getAnswerString() {
 		// Create new Scanner 
 		Scanner sc = new Scanner(System.in);
 		String answer = sc.nextLine();
@@ -183,4 +193,15 @@ public class QueryLD {
 		return answer;
 	}
 	
+	/**
+	 * 
+	 * @return answer: which is the user input to the query as integer
+	 */
+	public static int getAnswerInt() {
+		// Create new Scanner 
+		Scanner sc = new Scanner(System.in);
+		int answer = sc.nextInt();
+		sc.close();
+		return answer;
+	}
 }
