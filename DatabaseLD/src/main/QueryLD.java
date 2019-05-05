@@ -120,7 +120,6 @@ public class QueryLD {
 		String username = scanner.nextLine();
 		System.out.println("passcode: ");
 		String dbpassword = scanner.nextLine(); 
-//		scanner.close();
 		Connection conn = dbc.getDatabaseConnection(username, dbpassword); 
 		QueryLD sqObj = new QueryLD(conn);
 		// END OF database connection process
@@ -178,22 +177,8 @@ public class QueryLD {
 				e.printStackTrace();
 				quit = true;
 			}
-//			QUITS WHILE LOOP
-//			quit = true;
 		}
-		
-//		// Query 13 runner
-//		ArrayList<String[]> str = sqObj.workerJob("3");
-//		for (String[] line : str) {
-//			System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
-//		}
-//		
-//		// Query 14 runner 
-//		ArrayList<String[]> str2 = sqObj.onceHeldPosition("1");
-//		for (String[] line : str2) {
-//			System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
-//					line[0], line[1], line[2], line[3], line[4]);
-//		}
+		// Closes the Scanner
 		scanner.close();
 	}
 	
