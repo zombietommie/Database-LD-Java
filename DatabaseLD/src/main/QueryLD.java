@@ -5,6 +5,7 @@
  */
 
 package main;
+import java.awt.print.Printable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -102,6 +103,8 @@ public class QueryLD {
 	 * WARNING THESE ARE HARDCODED NEED APP
 	 */
 	public static void main(String[] args) throws SQLException {
+		
+		// Start of the connection to database by asking for username and password
 		if (args.length == 1) {
 			System.out.println("usage: java SampleQuery db-IP dp-SID"); 
 			System.exit(1);
@@ -116,27 +119,68 @@ public class QueryLD {
 		String username = scanner.nextLine();
 		System.out.println("passcode: ");
 		String dbpassword = scanner.nextLine(); 
-		scanner.close();
+//		scanner.close();
 		Connection conn = dbc.getDatabaseConnection(username, dbpassword); 
 		QueryLD sqObj = new QueryLD(conn);
+		// END OF database connection process
+		
+		// Variables in MAIN
+		Boolean quit = false;
 		
 		
-		
-		// Query 13 runner
-		ArrayList<String[]> str = sqObj.workerJob("3");
-		for (String[] line : str) {
-			System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+		/**
+		 * Loop to run the program 
+		 */
+		while(!quit) {
+			System.out.println("\n\n*****JJT LD Database Java Query Runner*****\n\n");
+			System.out.println("Please enter a query number (1-28): ");
+			// give user choice option
+			int choice = scanner.nextInt();
+			if (choice == 13) {
+				// Query 13 runner
+				System.out.println("Running Query 13:");
+				System.out.println("Given a person’s identifier, find all the jobs this person is currently holding and worked\n" + 
+						"in the past.");
+				System.out.print("Enter a person's ID: ");
+				String ans = getAnswer();
+				ArrayList<String[]> str = sqObj.workerJob(ans);
+				for (String[] line : str) {
+					System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+				}
+			}
+			else if (choice == 0) {
+				quit = true;
+			}
+			scanner.close();
+			quit = true;
 		}
 		
-		// Query 14 runner 
-		ArrayList<String[]> str2 = sqObj.onceHeldPosition("1");
-		for (String[] line : str2) {
-			System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", line[0], line[1], line[2], line[3], line[4]);
-		}
+//		// Query 13 runner
+//		ArrayList<String[]> str = sqObj.workerJob("3");
+//		for (String[] line : str) {
+//			System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+//		}
+//		
+//		// Query 14 runner 
+//		ArrayList<String[]> str2 = sqObj.onceHeldPosition("1");
+//		for (String[] line : str2) {
+//			System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
+//					line[0], line[1], line[2], line[3], line[4]);
+//		}
+	
 		
 		
 		
 		
+	}
+	
+	
+	public static String getAnswer() {
+		// Create new Scanner 
+		Scanner sc = new Scanner(System.in);
+		String answer = sc.nextLine();
+		sc.close();
+		return answer;
 	}
 	
 }
