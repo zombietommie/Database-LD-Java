@@ -139,8 +139,8 @@ public class QueryLD {
 			try {
 				int choice = scanner.nextInt();
 				
-				if (choice < 13) {
-					System.out.println("ERROR: You have entered the value below the given range!");
+				if (choice > 0 && choice < 13) {
+					System.out.println("ERROR>>>>> You have entered the value below the given range!");
 				}
 				else if (choice == 13) {
 					// Query 13 runner
@@ -154,14 +154,29 @@ public class QueryLD {
 						System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
 					}
 				}
+				else if (choice == 14) {
+					// Query 14 runner 
+					System.out.println("Running Query 14:");
+					System.out.println("In a local or national crisis, we need to find all the people who once held a position of the given pos_code. List\n" + 
+							"per_id, name, job title and the years the person worked in (starting year and ending year).");
+					System.out.println("Enter a position code: ");
+					String ans = getAnswerString();
+					ArrayList<String[]> str2 = sqObj.onceHeldPosition(ans);
+					for (String[] line : str2) {
+						System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
+								line[0], line[1], line[2], line[3], line[4]);
+					}
+				}
+				// This else is to check if use want to QUIT
 				else if (choice == 0) {
+					System.out.println("Quiting program...");
 					quit = true;
-					scanner.close();
 				}
 				
 			} catch (InputMismatchException e) {
-				System.out.println("ERROR: the value must be an integer\n");
+				System.out.println("ERROR>>>> the value must be an integer\n");
 				e.printStackTrace();
+				quit = true;
 			}
 //			QUITS WHILE LOOP
 //			quit = true;
@@ -179,6 +194,7 @@ public class QueryLD {
 //			System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
 //					line[0], line[1], line[2], line[3], line[4]);
 //		}
+		scanner.close();
 	}
 	
 	/**
@@ -189,7 +205,7 @@ public class QueryLD {
 		// Create new Scanner 
 		Scanner sc = new Scanner(System.in);
 		String answer = sc.nextLine();
-		sc.close();
+//		sc.close();
 		return answer;
 	}
 	
@@ -201,7 +217,7 @@ public class QueryLD {
 		// Create new Scanner 
 		Scanner sc = new Scanner(System.in);
 		int answer = sc.nextInt();
-		sc.close();
+//		sc.close();
 		return answer;
 	}
 }
