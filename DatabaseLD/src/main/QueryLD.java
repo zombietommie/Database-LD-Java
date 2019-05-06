@@ -50,7 +50,7 @@ public class QueryLD {
 	 * @return 
 	 * @throws SQLException
 	 */
-	public ArrayList<String[]> workerJob(String per_id) throws SQLException {
+	public ArrayList<String[]> queryThirteen(String per_id) throws SQLException {
 		String str = "SELECT first_name, last_name, job_title " + 
 				"FROM Person NATURAL JOIN works " + 
 				"WHERE per_id = ? ";
@@ -74,7 +74,7 @@ public class QueryLD {
 	 * @return 
 	 * @throws SQLException
 	 */
-	public ArrayList<String[]> onceHeldPosition(String pos_code) throws SQLException {
+	public ArrayList<String[]> queryFourteen(String pos_code) throws SQLException {
 		String str = "SELECT per_id, first_name, job_title, start_date, end_date " + 
 				"FROM person natural join works " + 
 				"WHERE pos_code = ? ";
@@ -101,7 +101,6 @@ public class QueryLD {
 	
 	/** tester
 	 * Run Query here!!!
-	 * WARNING THESE ARE HARDCODED NEED APP
 	 */
 	public static void main(String[] args) throws SQLException {
 		
@@ -148,7 +147,7 @@ public class QueryLD {
 							"in the past.");
 					System.out.print("Enter a person's ID: ");
 					String ans = getAnswerString();
-					ArrayList<String[]> str = sqObj.workerJob(ans);
+					ArrayList<String[]> str = sqObj.queryThirteen(ans);
 					for (String[] line : str) {
 						System.out.printf("first_name\tlast_name\tjob_title\n%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
 					}
@@ -160,7 +159,7 @@ public class QueryLD {
 							"per_id, name, job title and the years the person worked in (starting year and ending year).");
 					System.out.println("Enter a position code: ");
 					String ans = getAnswerString();
-					ArrayList<String[]> str2 = sqObj.onceHeldPosition(ans);
+					ArrayList<String[]> str2 = sqObj.queryFourteen(ans);
 					for (String[] line : str2) {
 						System.out.printf("pos_code\tfirst_name\tjob_title\t\tstart_date\t\tend_date\n%s\t\t%s\t\t%s\t%s\t%s\n\n ", 
 								line[0], line[1], line[2], line[3], line[4]);
