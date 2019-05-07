@@ -663,7 +663,7 @@ public class QueryLD {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<String[]> queryTwentyFour(String pos_code) throws SQLException {
+	public ArrayList<String[]> queryTwentFour(String pos_code) throws SQLException {
 		String str = "SELECT\n" + 
 				"    COUNT(\"A1\".\"PER_ID\") \"COUNT(PER_ID)\",\n" + 
 				"    \"A1\".\"SK_CODE\" \"SK_CODE\"\n" + 
@@ -923,7 +923,7 @@ public class QueryLD {
 					System.out.println("Enter a position code: ");
 					String ans = getAnswerString();
 					System.out.println("COUNT(per_id)\t\tsk_code");
-					ArrayList<String[]> str = sqObj.queryTwentyFour(ans);
+					ArrayList<String[]> str = sqObj.queryTwentFour(ans);
 					for (String[] line : str) {
 						System.out.printf("%s\t\t\t%s\n\n",line[0], line[1]);
 						}
