@@ -217,83 +217,66 @@ public class QueryLD {
 		}
 		return al;
 	}
-	
+
 	/**
 	 * Query 17 A
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	public ArrayList<String[]> querySeventeenA() throws SQLException {
-		String str = "SELECT\n" + 
-				"    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n" + 
-				"    \"A1\".\"EMPLOYER\" \"EMPLOYER\"\n" + 
-				"FROM\n" + 
-				"    (\n" + 
-				"        SELECT\n" + 
-				"            COUNT(\"A2\".\"PER_ID\") \"NUM_EMPLOYED\",\n" + 
-				"            \"A2\".\"COMP_ID\"          \"EMPLOYER\",\n" + 
-				"            \"A2\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n" + 
-				"            \"A2\".\"IND_ID\"           \"SUB_IND\",\n" + 
-				"            \"A2\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"        FROM\n" + 
-				"            (\n" + 
-				"                SELECT\n" + 
-				"                    \"A3\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                    \"A4\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                    \"A4\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                    \"A4\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                    \"A3\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"                FROM\n" + 
-				"                    (\n" + 
-				"                        SELECT\n" + 
-				"                            \"A5\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                            \"A5\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                            \"A6\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n" + 
-				"                        FROM\n" + 
-				"                            (\n" + 
-				"                                SELECT\n" + 
-				"                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                                    \"A7\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                                    \"A7\".\"IND_ID\"           \"IND_ID\"\n" + 
-				"                                FROM\n" + 
-				"                                    (\n" + 
-				"                                        SELECT\n" + 
-				"                                            \"A9\".\"JOB_CODE\"    \"JOB_CODE\",\n" + 
-				"                                            \"A9\".\"JOB_TITLE\"   \"JOB_TITLE\",\n" + 
-				"                                            \"A9\".\"POS_CODE\"    \"POS_CODE\",\n" + 
-				"                                            \"A10\".\"PER_ID\"     \"PER_ID\",\n" + 
-				"                                            \"A9\".\"COMP_ID\"     \"COMP_ID\"\n" + 
-				"                                        FROM\n" + 
-				"                                            \"TATRAN6\".\"WORKS\"   \"A10\",\n" + 
-				"                                            \"TATRAN6\".\"JOB\"     \"A9\"\n" + 
-				"                                        WHERE\n" + 
-				"                                            \"A10\".\"POS_CODE\" = \"A9\".\"POS_CODE\"\n" + 
-				"                                            AND \"A10\".\"JOB_TITLE\" = \"A9\".\"JOB_TITLE\"\n" + 
-				"                                            AND \"A10\".\"JOB_CODE\" = \"A9\".\"JOB_CODE\"\n" + 
-				"                                    ) \"A8\",\n" + 
-				"                                    \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                 \"A7\"\n" + 
-				"                                WHERE\n" + 
-				"                                    \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n" + 
-				"                            ) \"A6\",\n" + 
-				"                            \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                               \"A5\"\n" + 
-				"                        WHERE\n" + 
-				"                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n" + 
-				"                            AND \"A6\".\"COMP_ID\" = \"A5\".\"COMP_ID\"\n" + 
-				"                    ) \"A4\",\n" + 
-				"                    \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \"A3\"\n" + 
-				"                WHERE\n" + 
-				"                    \"A4\".\"IND_ID\" = \"A3\".\"IND_ID\"\n" + 
-				"            ) \"A2\"\n" + 
-				"        GROUP BY\n" + 
-				"            \"A2\".\"COMP_ID\",\n" + 
-				"            \"A2\".\"INDUSTRY_GROUP\",\n" + 
-				"            \"A2\".\"IND_ID\",\n" + 
-				"            \"A2\".\"PARENT_ID\"\n" + 
-				"    ) \"A1\"\n" + 
-				"GROUP BY\n" + 
-				"    \"A1\".\"EMPLOYER\"";
+		String str = "SELECT\n" + "    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n"
+				+ "    \"A1\".\"EMPLOYER\" \"EMPLOYER\"\n" + "FROM\n" + "    (\n" + "        SELECT\n"
+				+ "            COUNT(\"A2\".\"PER_ID\") \"NUM_EMPLOYED\",\n"
+				+ "            \"A2\".\"COMP_ID\"          \"EMPLOYER\",\n"
+				+ "            \"A2\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n"
+				+ "            \"A2\".\"IND_ID\"           \"SUB_IND\",\n"
+				+ "            \"A2\".\"PARENT_ID\"        \"PARENT_ID\"\n" + "        FROM\n" + "            (\n"
+				+ "                SELECT\n" + "                    \"A3\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                    \"A4\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                    \"A4\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                    \"A4\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                    \"A3\".\"PARENT_ID\"        \"PARENT_ID\"\n" + "                FROM\n"
+				+ "                    (\n" + "                        SELECT\n"
+				+ "                            \"A5\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                            \"A5\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                            \"A6\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n"
+				+ "                        FROM\n" + "                            (\n"
+				+ "                                SELECT\n"
+				+ "                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                                    \"A7\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                                    \"A7\".\"IND_ID\"           \"IND_ID\"\n"
+				+ "                                FROM\n" + "                                    (\n"
+				+ "                                        SELECT\n"
+				+ "                                            \"A9\".\"JOB_CODE\"    \"JOB_CODE\",\n"
+				+ "                                            \"A9\".\"JOB_TITLE\"   \"JOB_TITLE\",\n"
+				+ "                                            \"A9\".\"POS_CODE\"    \"POS_CODE\",\n"
+				+ "                                            \"A10\".\"PER_ID\"     \"PER_ID\",\n"
+				+ "                                            \"A9\".\"COMP_ID\"     \"COMP_ID\"\n"
+				+ "                                        FROM\n"
+				+ "                                            \"TATRAN6\".\"WORKS\"   \"A10\",\n"
+				+ "                                            \"TATRAN6\".\"JOB\"     \"A9\"\n"
+				+ "                                        WHERE\n"
+				+ "                                            \"A10\".\"POS_CODE\" = \"A9\".\"POS_CODE\"\n"
+				+ "                                            AND \"A10\".\"JOB_TITLE\" = \"A9\".\"JOB_TITLE\"\n"
+				+ "                                            AND \"A10\".\"JOB_CODE\" = \"A9\".\"JOB_CODE\"\n"
+				+ "                                    ) \"A8\",\n"
+				+ "                                    \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                 \"A7\"\n"
+				+ "                                WHERE\n"
+				+ "                                    \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n"
+				+ "                            ) \"A6\",\n"
+				+ "                            \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                               \"A5\"\n"
+				+ "                        WHERE\n"
+				+ "                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n"
+				+ "                            AND \"A6\".\"COMP_ID\" = \"A5\".\"COMP_ID\"\n"
+				+ "                    ) \"A4\",\n"
+				+ "                    \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \"A3\"\n"
+				+ "                WHERE\n" + "                    \"A4\".\"IND_ID\" = \"A3\".\"IND_ID\"\n"
+				+ "            ) \"A2\"\n" + "        GROUP BY\n" + "            \"A2\".\"COMP_ID\",\n"
+				+ "            \"A2\".\"INDUSTRY_GROUP\",\n" + "            \"A2\".\"IND_ID\",\n"
+				+ "            \"A2\".\"PARENT_ID\"\n" + "    ) \"A1\"\n" + "GROUP BY\n" + "    \"A1\".\"EMPLOYER\"";
 		ArrayList<String[]> al = new ArrayList<String[]>();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
@@ -305,83 +288,66 @@ public class QueryLD {
 		}
 		return al;
 	}
-	
+
 	/**
 	 * Query 17 B setup
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	public ArrayList<String[]> querySeventeenB() throws SQLException {
-		String str = "SELECT\n" + 
-				"    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n" + 
-				"    \"A1\".\"IND_GROUP\" \"IND_GROUP\"\n" + 
-				"FROM\n" + 
-				"    (\n" + 
-				"        SELECT\n" + 
-				"            COUNT(\"A2\".\"PER_ID\") \"NUM_EMPLOYED\",\n" + 
-				"            \"A2\".\"COMP_ID\"          \"EMPLOYER\",\n" + 
-				"            \"A2\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n" + 
-				"            \"A2\".\"IND_ID\"           \"SUB_IND\",\n" + 
-				"            \"A2\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"        FROM\n" + 
-				"            (\n" + 
-				"                SELECT\n" + 
-				"                    \"A3\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                    \"A4\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                    \"A4\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                    \"A4\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                    \"A3\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"                FROM\n" + 
-				"                    (\n" + 
-				"                        SELECT\n" + 
-				"                            \"A5\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                            \"A5\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                            \"A6\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n" + 
-				"                        FROM\n" + 
-				"                            (\n" + 
-				"                                SELECT\n" + 
-				"                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                                    \"A7\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                                    \"A7\".\"IND_ID\"           \"IND_ID\"\n" + 
-				"                                FROM\n" + 
-				"                                    (\n" + 
-				"                                        SELECT\n" + 
-				"                                            \"A9\".\"JOB_CODE\"    \"JOB_CODE\",\n" + 
-				"                                            \"A9\".\"JOB_TITLE\"   \"JOB_TITLE\",\n" + 
-				"                                            \"A9\".\"POS_CODE\"    \"POS_CODE\",\n" + 
-				"                                            \"A10\".\"PER_ID\"     \"PER_ID\",\n" + 
-				"                                            \"A9\".\"COMP_ID\"     \"COMP_ID\"\n" + 
-				"                                        FROM\n" + 
-				"                                            \"TATRAN6\".\"WORKS\"   \"A10\",\n" + 
-				"                                            \"TATRAN6\".\"JOB\"     \"A9\"\n" + 
-				"                                        WHERE\n" + 
-				"                                            \"A10\".\"POS_CODE\" = \"A9\".\"POS_CODE\"\n" + 
-				"                                            AND \"A10\".\"JOB_TITLE\" = \"A9\".\"JOB_TITLE\"\n" + 
-				"                                            AND \"A10\".\"JOB_CODE\" = \"A9\".\"JOB_CODE\"\n" + 
-				"                                    ) \"A8\",\n" + 
-				"                                    \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                 \"A7\"\n" + 
-				"                                WHERE\n" + 
-				"                                    \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n" + 
-				"                            ) \"A6\",\n" + 
-				"                            \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                               \"A5\"\n" + 
-				"                        WHERE\n" + 
-				"                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n" + 
-				"                            AND \"A6\".\"COMP_ID\" = \"A5\".\"COMP_ID\"\n" + 
-				"                    ) \"A4\",\n" + 
-				"                    \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \"A3\"\n" + 
-				"                WHERE\n" + 
-				"                    \"A4\".\"IND_ID\" = \"A3\".\"IND_ID\"\n" + 
-				"            ) \"A2\"\n" + 
-				"        GROUP BY\n" + 
-				"            \"A2\".\"INDUSTRY_GROUP\",\n" + 
-				"            \"A2\".\"COMP_ID\",\n" + 
-				"            \"A2\".\"IND_ID\",\n" + 
-				"            \"A2\".\"PARENT_ID\"\n" + 
-				"    ) \"A1\"\n" + 
-				"GROUP BY\n" + 
-				"    \"A1\".\"IND_GROUP\"";
+		String str = "SELECT\n" + "    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n"
+				+ "    \"A1\".\"IND_GROUP\" \"IND_GROUP\"\n" + "FROM\n" + "    (\n" + "        SELECT\n"
+				+ "            COUNT(\"A2\".\"PER_ID\") \"NUM_EMPLOYED\",\n"
+				+ "            \"A2\".\"COMP_ID\"          \"EMPLOYER\",\n"
+				+ "            \"A2\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n"
+				+ "            \"A2\".\"IND_ID\"           \"SUB_IND\",\n"
+				+ "            \"A2\".\"PARENT_ID\"        \"PARENT_ID\"\n" + "        FROM\n" + "            (\n"
+				+ "                SELECT\n" + "                    \"A3\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                    \"A4\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                    \"A4\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                    \"A4\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                    \"A3\".\"PARENT_ID\"        \"PARENT_ID\"\n" + "                FROM\n"
+				+ "                    (\n" + "                        SELECT\n"
+				+ "                            \"A5\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                            \"A5\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                            \"A6\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n"
+				+ "                        FROM\n" + "                            (\n"
+				+ "                                SELECT\n"
+				+ "                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                                    \"A7\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                                    \"A7\".\"IND_ID\"           \"IND_ID\"\n"
+				+ "                                FROM\n" + "                                    (\n"
+				+ "                                        SELECT\n"
+				+ "                                            \"A9\".\"JOB_CODE\"    \"JOB_CODE\",\n"
+				+ "                                            \"A9\".\"JOB_TITLE\"   \"JOB_TITLE\",\n"
+				+ "                                            \"A9\".\"POS_CODE\"    \"POS_CODE\",\n"
+				+ "                                            \"A10\".\"PER_ID\"     \"PER_ID\",\n"
+				+ "                                            \"A9\".\"COMP_ID\"     \"COMP_ID\"\n"
+				+ "                                        FROM\n"
+				+ "                                            \"TATRAN6\".\"WORKS\"   \"A10\",\n"
+				+ "                                            \"TATRAN6\".\"JOB\"     \"A9\"\n"
+				+ "                                        WHERE\n"
+				+ "                                            \"A10\".\"POS_CODE\" = \"A9\".\"POS_CODE\"\n"
+				+ "                                            AND \"A10\".\"JOB_TITLE\" = \"A9\".\"JOB_TITLE\"\n"
+				+ "                                            AND \"A10\".\"JOB_CODE\" = \"A9\".\"JOB_CODE\"\n"
+				+ "                                    ) \"A8\",\n"
+				+ "                                    \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                 \"A7\"\n"
+				+ "                                WHERE\n"
+				+ "                                    \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n"
+				+ "                            ) \"A6\",\n"
+				+ "                            \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                               \"A5\"\n"
+				+ "                        WHERE\n"
+				+ "                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n"
+				+ "                            AND \"A6\".\"COMP_ID\" = \"A5\".\"COMP_ID\"\n"
+				+ "                    ) \"A4\",\n"
+				+ "                    \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \"A3\"\n"
+				+ "                WHERE\n" + "                    \"A4\".\"IND_ID\" = \"A3\".\"IND_ID\"\n"
+				+ "            ) \"A2\"\n" + "        GROUP BY\n" + "            \"A2\".\"INDUSTRY_GROUP\",\n"
+				+ "            \"A2\".\"COMP_ID\",\n" + "            \"A2\".\"IND_ID\",\n"
+				+ "            \"A2\".\"PARENT_ID\"\n" + "    ) \"A1\"\n" + "GROUP BY\n" + "    \"A1\".\"IND_GROUP\"";
 		ArrayList<String[]> al = new ArrayList<String[]>();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
@@ -393,88 +359,76 @@ public class QueryLD {
 		}
 		return al;
 	}
-	
+
+	/**
+	 * Query 17 C setup
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<String[]> querySeventeenC() throws SQLException {
-		String str = "SELECT\n" + 
-				"    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n" + 
-				"    \"A1\".\"PARENT_ID\" \"PARENT_ID\"\n" + 
-				"FROM\n" + 
-				"    (\n" + 
-				"        SELECT\n" + 
-				"            \"A2\".\"PARENT_ID\"      \"PARENT_ID\",\n" + 
-				"            \"A3\".\"NUM_EMPLOYED\"   \"NUM_EMPLOYED\",\n" + 
-				"            \"A2\".\"IND_ID\"         \"IND_ID\"\n" + 
-				"        FROM\n" + 
-				"            (\n" + 
-				"                SELECT\n" + 
-				"                    COUNT(\"A4\".\"PER_ID\") \"NUM_EMPLOYED\",\n" + 
-				"                    \"A4\".\"COMP_ID\"          \"EMPLOYER\",\n" + 
-				"                    \"A4\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n" + 
-				"                    \"A4\".\"IND_ID\"           \"SUB_IND\",\n" + 
-				"                    \"A4\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"                FROM\n" + 
-				"                    (\n" + 
-				"                        SELECT\n" + 
-				"                            \"A5\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                            \"A6\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                            \"A6\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                            \"A5\".\"PARENT_ID\"        \"PARENT_ID\"\n" + 
-				"                        FROM\n" + 
-				"                            (\n" + 
-				"                                SELECT\n" + 
-				"                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                                    \"A7\".\"IND_ID\"           \"IND_ID\",\n" + 
-				"                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n" + 
-				"                                    \"A8\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n" + 
-				"                                FROM\n" + 
-				"                                    (\n" + 
-				"                                        SELECT\n" + 
-				"                                            \"A9\".\"COMP_ID\"          \"COMP_ID\",\n" + 
-				"                                            \"A10\".\"PER_ID\"          \"PER_ID\",\n" + 
-				"                                            \"A9\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n" + 
-				"                                            \"A9\".\"IND_ID\"           \"IND_ID\"\n" + 
-				"                                        FROM\n" + 
-				"                                            (\n" + 
-				"                                                SELECT\n" + 
-				"                                                    \"A11\".\"JOB_CODE\"    \"JOB_CODE\",\n" + 
-				"                                                    \"A11\".\"JOB_TITLE\"   \"JOB_TITLE\",\n" + 
-				"                                                    \"A11\".\"POS_CODE\"    \"POS_CODE\",\n" + 
-				"                                                    \"A12\".\"PER_ID\"      \"PER_ID\",\n" + 
-				"                                                    \"A11\".\"COMP_ID\"     \"COMP_ID\"\n" + 
-				"                                                FROM\n" + 
-				"                                                    \"TATRAN6\".\"WORKS\"   \"A12\",\n" + 
-				"                                                    \"TATRAN6\".\"JOB\"     \"A11\"\n" + 
-				"                                                WHERE\n" + 
-				"                                                    \"A12\".\"POS_CODE\" = \"A11\".\"POS_CODE\"\n" + 
-				"                                                    AND \"A12\".\"JOB_TITLE\" = \"A11\".\"JOB_TITLE\"\n" + 
-				"                                                    AND \"A12\".\"JOB_CODE\" = \"A11\".\"JOB_CODE\"\n" + 
-				"                                            ) \"A10\",\n" + 
-				"                                            \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                         \"A9\"\n" + 
-				"                                        WHERE\n" + 
-				"                                            \"A10\".\"COMP_ID\" = \"A9\".\"COMP_ID\"\n" + 
-				"                                    ) \"A8\",\n" + 
-				"                                    \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \"A7\"\n" + 
-				"                                WHERE\n" + 
-				"                                    \"A8\".\"IND_ID\" = \"A7\".\"IND_ID\"\n" + 
-				"                                    AND \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n" + 
-				"                            ) \"A6\",\n" + 
-				"                            \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \"A5\"\n" + 
-				"                        WHERE\n" + 
-				"                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n" + 
-				"                    ) \"A4\"\n" + 
-				"                GROUP BY\n" + 
-				"                    \"A4\".\"COMP_ID\",\n" + 
-				"                    \"A4\".\"INDUSTRY_GROUP\",\n" + 
-				"                    \"A4\".\"IND_ID\",\n" + 
-				"                    \"A4\".\"PARENT_ID\"\n" + 
-				"            ) \"A3\",\n" + 
-				"            \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           \"A2\"\n" + 
-				"        WHERE\n" + 
-				"            \"A3\".\"PARENT_ID\" = \"A2\".\"PARENT_ID\"\n" + 
-				"    ) \"A1\"\n" + 
-				"GROUP BY\n" + 
-				"    \"A1\".\"PARENT_ID\"";
+		String str = "SELECT\n" + "    SUM(\"A1\".\"NUM_EMPLOYED\") \"SUM(NUM_EMPLOYED)\",\n"
+				+ "    \"A1\".\"PARENT_ID\" \"PARENT_ID\"\n" + "FROM\n" + "    (\n" + "        SELECT\n"
+				+ "            \"A2\".\"PARENT_ID\"      \"PARENT_ID\",\n"
+				+ "            \"A3\".\"NUM_EMPLOYED\"   \"NUM_EMPLOYED\",\n"
+				+ "            \"A2\".\"IND_ID\"         \"IND_ID\"\n" + "        FROM\n" + "            (\n"
+				+ "                SELECT\n" + "                    COUNT(\"A4\".\"PER_ID\") \"NUM_EMPLOYED\",\n"
+				+ "                    \"A4\".\"COMP_ID\"          \"EMPLOYER\",\n"
+				+ "                    \"A4\".\"INDUSTRY_GROUP\"   \"IND_GROUP\",\n"
+				+ "                    \"A4\".\"IND_ID\"           \"SUB_IND\",\n"
+				+ "                    \"A4\".\"PARENT_ID\"        \"PARENT_ID\"\n" + "                FROM\n"
+				+ "                    (\n" + "                        SELECT\n"
+				+ "                            \"A5\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                            \"A6\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                            \"A6\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                            \"A6\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                            \"A5\".\"PARENT_ID\"        \"PARENT_ID\"\n"
+				+ "                        FROM\n" + "                            (\n"
+				+ "                                SELECT\n"
+				+ "                                    \"A7\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                                    \"A7\".\"IND_ID\"           \"IND_ID\",\n"
+				+ "                                    \"A8\".\"PER_ID\"           \"PER_ID\",\n"
+				+ "                                    \"A8\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\"\n"
+				+ "                                FROM\n" + "                                    (\n"
+				+ "                                        SELECT\n"
+				+ "                                            \"A9\".\"COMP_ID\"          \"COMP_ID\",\n"
+				+ "                                            \"A10\".\"PER_ID\"          \"PER_ID\",\n"
+				+ "                                            \"A9\".\"INDUSTRY_GROUP\"   \"INDUSTRY_GROUP\",\n"
+				+ "                                            \"A9\".\"IND_ID\"           \"IND_ID\"\n"
+				+ "                                        FROM\n" + "                                            (\n"
+				+ "                                                SELECT\n"
+				+ "                                                    \"A11\".\"JOB_CODE\"    \"JOB_CODE\",\n"
+				+ "                                                    \"A11\".\"JOB_TITLE\"   \"JOB_TITLE\",\n"
+				+ "                                                    \"A11\".\"POS_CODE\"    \"POS_CODE\",\n"
+				+ "                                                    \"A12\".\"PER_ID\"      \"PER_ID\",\n"
+				+ "                                                    \"A11\".\"COMP_ID\"     \"COMP_ID\"\n"
+				+ "                                                FROM\n"
+				+ "                                                    \"TATRAN6\".\"WORKS\"   \"A12\",\n"
+				+ "                                                    \"TATRAN6\".\"JOB\"     \"A11\"\n"
+				+ "                                                WHERE\n"
+				+ "                                                    \"A12\".\"POS_CODE\" = \"A11\".\"POS_CODE\"\n"
+				+ "                                                    AND \"A12\".\"JOB_TITLE\" = \"A11\".\"JOB_TITLE\"\n"
+				+ "                                                    AND \"A12\".\"JOB_CODE\" = \"A11\".\"JOB_CODE\"\n"
+				+ "                                            ) \"A10\",\n"
+				+ "                                            \"TATRAN6\".\"COMPANY\"                                                                                                                                                                                                                                                                                         \"A9\"\n"
+				+ "                                        WHERE\n"
+				+ "                                            \"A10\".\"COMP_ID\" = \"A9\".\"COMP_ID\"\n"
+				+ "                                    ) \"A8\",\n"
+				+ "                                    \"TATRAN6\".\"SUB_INDUSTRY\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \"A7\"\n"
+				+ "                                WHERE\n"
+				+ "                                    \"A8\".\"IND_ID\" = \"A7\".\"IND_ID\"\n"
+				+ "                                    AND \"A8\".\"COMP_ID\" = \"A7\".\"COMP_ID\"\n"
+				+ "                            ) \"A6\",\n"
+				+ "                            \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \"A5\"\n"
+				+ "                        WHERE\n"
+				+ "                            \"A6\".\"IND_ID\" = \"A5\".\"IND_ID\"\n"
+				+ "                    ) \"A4\"\n" + "                GROUP BY\n"
+				+ "                    \"A4\".\"COMP_ID\",\n" + "                    \"A4\".\"INDUSTRY_GROUP\",\n"
+				+ "                    \"A4\".\"IND_ID\",\n" + "                    \"A4\".\"PARENT_ID\"\n"
+				+ "            ) \"A3\",\n"
+				+ "            \"TATRAN6\".\"GICS\"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           \"A2\"\n"
+				+ "        WHERE\n" + "            \"A3\".\"PARENT_ID\" = \"A2\".\"PARENT_ID\"\n" + "    ) \"A1\"\n"
+				+ "GROUP BY\n" + "    \"A1\".\"PARENT_ID\"";
 		ArrayList<String[]> al = new ArrayList<String[]>();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
@@ -482,6 +436,309 @@ public class QueryLD {
 			String[] line = new String[2];
 			line[0] = Integer.toString(rs.getInt("SUM(num_employed)"));
 			line[1] = rs.getString("parent_id");
+			al.add(line);
+		}
+		return al;
+	}
+
+	/**
+	 * Query 18 setup
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryEightteen() throws SQLException {
+		String str = "WITH job_distribution AS (\n"
+				+ "SELECT COUNT(per_id) as num_workers, ind_id AS industry, parent_id\n"
+				+ "FROM works NATURAL JOIN job NATURAL JOIN company NATURAL JOIN sub_industry NATURAL JOIN GICS\n"
+				+ "GROUP BY ind_id, parent_id)\n" + "\n" + "SELECT SUM(num_workers), parent_id \n"
+				+ "FROM job_distribution \n" + "GROUP BY parent_id";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		while (rs.next()) {
+			String[] line = new String[2];
+			line[0] = Integer.toString(rs.getInt("SUM(num_workers)"));
+			line[1] = rs.getString("parent_id");
+			al.add(line);
+		}
+		return al;
+	}
+
+	/**
+	 * Query 20 setup
+	 * 
+	 * @param per_id
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryTwenty(String per_id) throws SQLException {
+		String str = "WITH qualified AS (\n" + "SELECT pos_code, title\n" + "FROM position P\n" + "WHERE NOT EXISTS (\n"
+				+ "SELECT sk_code\n" + "FROM Requires R\n" + "WHERE R.pos_code = P.pos_code\n" + "MINUS\n"
+				+ "SELECT sk_code\n" + "FROM has_skill\n" + "WHERE per_id = ?\n" + ")\n"
+				+ ")SELECT title, job_code, SUM(pay_rate)\n"
+				+ "FROM qualified NATURAL JOIN job NATURAL JOIN requires_by_job\n" + "GROUP BY title, job_code";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		PreparedStatement pStmt = conn.prepareStatement(str);
+		pStmt.setString(1, per_id);
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			String[] line = new String[3];
+			line[0] = rs.getString("title");
+			line[1] = rs.getString("job_code");
+			line[2] = Float.toString(rs.getFloat("SUM(pay_rate)"));
+			al.add(line);
+		}
+		return al;
+	}
+
+	/**
+	 * Query 21 setup
+	 * 
+	 * @param pos_code
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryTwentyOne(String pos_code) throws SQLException {
+		String str = "SELECT first_name, email\n" + "FROM Person P\n" + "WHERE NOT EXISTS \n" + "(\n"
+				+ "SELECT sk_code\n" + "FROM Requires\n" + "WHERE pos_code = ?\n" + "MINUS\n" + "SELECT sk_code\n"
+				+ "FROM Has_Skill H \n" + "WHERE P.per_id = H.per_id)\n";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		PreparedStatement pStmt = conn.prepareStatement(str);
+		pStmt.setString(1, pos_code);
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			String[] line = new String[2];
+			line[0] = rs.getString("first_name");
+			line[1] = rs.getString("email");
+			al.add(line);
+		}
+		return al;
+	}
+
+	/**
+	 * Query 22 setup
+	 * @param pos_code1
+	 * @param pos_code2
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryTwentyTwo(String pos_code1, String pos_code2) throws SQLException {
+		String str = "SELECT\n" + "    \"A1\".\"PER_ID\"     \"PER_ID\",\n" + "    \"A1\".\"JOB_CODE\"   \"JOB_CODE\"\n"
+				+ "FROM\n" + "    (\n" + "        SELECT\n" + "            \"A3\".\"PER_ID\"     \"PER_ID\",\n"
+				+ "            \"A3\".\"JOB_CODE\"   \"JOB_CODE\",\n"
+				+ "            COUNT(\"A2\".\"SK_TOTAL\") - COUNT(\"A3\".\"SK_CODE\") \"AMOUNT\"\n" + "        FROM\n"
+				+ "            (\n" + "                SELECT\n"
+				+ "                    \"A4\".\"POS_CODE\"   \"POS_CODE\",\n"
+				+ "                    \"A5\".\"SK_CODE\"    \"SK_CODE\",\n"
+				+ "                    \"A5\".\"PER_ID\"     \"PER_ID\",\n"
+				+ "                    \"A4\".\"JOB_CODE\"   \"JOB_CODE\"\n" + "                FROM\n"
+				+ "                    (\n" + "                        SELECT\n"
+				+ "                            \"A7\".\"SK_CODE\"    \"SK_CODE\",\n"
+				+ "                            \"A8\".\"PER_ID\"     \"PER_ID\",\n"
+				+ "                            \"A7\".\"POS_CODE\"   \"POS_CODE\"\n" + "                        FROM\n"
+				+ "                            \"TATRAN6\".\"HAS_SKILL\"   \"A8\",\n"
+				+ "                            \"TATRAN6\".\"REQUIRES\"    \"A7\"\n" + "                        WHERE\n"
+				+ "                            \"A8\".\"SK_CODE\" = \"A7\".\"SK_CODE\"\n"
+				+ "                    ) \"A5\",\n"
+				+ "                    \"TATRAN6\".\"JOB\"                                                                                                                                                           \"A4\"\n"
+				+ "                WHERE\n" + "                    \"A5\".\"POS_CODE\" = \"A4\".\"POS_CODE\"\n"
+				+ "            ) \"A3\",\n" + "            (\n" + "                SELECT\n"
+				+ "                    \"A6\".\"SK_CODE\" \"SK_TOTAL\"\n" + "                FROM\n"
+				+ "                    \"TATRAN6\".\"REQUIRES\" \"A6\"\n" + "                WHERE\n"
+				+ "                    \"A6\".\"POS_CODE\" = ?\n"
+				+ "            )                                                                                                                                                                                                                                                          \"A2\"\n"
+				+ "        WHERE\n" + "            \"A3\".\"POS_CODE\" = ?\n" + "        GROUP BY\n"
+				+ "            \"A3\".\"PER_ID\",\n" + "            \"A3\".\"JOB_CODE\"\n" + "    ) \"A1\"\n"
+				+ "WHERE\n" + "    \"A1\".\"AMOUNT\" < 4 ";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		PreparedStatement pStmt = conn.prepareStatement(str);
+		pStmt.setString(1, pos_code1);
+		pStmt.setString(2, pos_code2);
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			String[] line = new String[2];
+			line[0] = rs.getString("per_id");
+			line[1] = rs.getString("job_code");
+			al.add(line);
+		}
+		return al;
+	}
+	
+	/**
+	 * Query 23 setup
+	 * @param pos_code
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryTwentyThree(String pos_code) throws SQLException {
+		String str = "SELECT\n" + 
+				"    \"A1\".\"PER_ID\"   \"PER_ID\",\n" + 
+				"    \"A1\".\"AMOUNT\"   \"AMOUNT\"\n" + 
+				"FROM\n" + 
+				"    (\n" + 
+				"        SELECT\n" + 
+				"            \"from$_subquery$_004\".\"PER_ID\" \"PER_ID\",\n" + 
+				"            (\n" + 
+				"                SELECT\n" + 
+				"                    COUNT(\"REQUIRES\".\"SK_CODE\") \"COUNT(SK_CODE)\"\n" + 
+				"                FROM\n" + 
+				"                    \"TATRAN6\".\"REQUIRES\" \"REQUIRES\"\n" + 
+				"                WHERE\n" + 
+				"                    \"REQUIRES\".\"POS_CODE\" = 1\n" + 
+				"            ) - COUNT(\"from$_subquery$_004\".\"PER_ID\") \"AMOUNT\"\n" + 
+				"        FROM\n" + 
+				"            (\n" + 
+				"                SELECT\n" + 
+				"                    \"REQUIRES\".\"SK_CODE\"    \"SK_CODE\",\n" + 
+				"                    \"HAS_SKILL\".\"PER_ID\"    \"PER_ID\",\n" + 
+				"                    \"REQUIRES\".\"POS_CODE\"   \"POS_CODE\"\n" + 
+				"                FROM\n" + 
+				"                    \"TATRAN6\".\"HAS_SKILL\"   \"HAS_SKILL\",\n" + 
+				"                    \"TATRAN6\".\"REQUIRES\"    \"REQUIRES\"\n" + 
+				"                WHERE\n" + 
+				"                    \"HAS_SKILL\".\"SK_CODE\" = \"REQUIRES\".\"SK_CODE\"\n" + 
+				"            ) \"from$_subquery$_004\"\n" + 
+				"        WHERE\n" + 
+				"            \"from$_subquery$_004\".\"POS_CODE\" = 1\n" + 
+				"        GROUP BY\n" + 
+				"            \"from$_subquery$_004\".\"PER_ID\"\n" + 
+				"    ) \"A1\"\n" + 
+				"WHERE\n" + 
+				"    \"A1\".\"AMOUNT\" = (\n" + 
+				"        SELECT\n" + 
+				"            \"A2\".\"MINAMOUNT\" \"MINAMOUNT\"\n" + 
+				"        FROM\n" + 
+				"            (\n" + 
+				"                SELECT\n" + 
+				"                    MIN(\"A3\".\"AMOUNT\") \"MINAMOUNT\"\n" + 
+				"                FROM\n" + 
+				"                    (\n" + 
+				"                        SELECT\n" + 
+				"                            \"from$_subquery$_004\".\"PER_ID\" \"PER_ID\",\n" + 
+				"                            (\n" + 
+				"                                SELECT\n" + 
+				"                                    COUNT(\"REQUIRES\".\"SK_CODE\") \"COUNT(SK_CODE)\"\n" + 
+				"                                FROM\n" + 
+				"                                    \"TATRAN6\".\"REQUIRES\" \"REQUIRES\"\n" + 
+				"                                WHERE\n" + 
+				"                                    \"REQUIRES\".\"POS_CODE\" = ?\n" + 
+				"                            ) - COUNT(\"from$_subquery$_004\".\"PER_ID\") \"AMOUNT\"\n" + 
+				"                        FROM\n" + 
+				"                            (\n" + 
+				"                                SELECT\n" + 
+				"                                    \"REQUIRES\".\"SK_CODE\"    \"SK_CODE\",\n" + 
+				"                                    \"HAS_SKILL\".\"PER_ID\"    \"PER_ID\",\n" + 
+				"                                    \"REQUIRES\".\"POS_CODE\"   \"POS_CODE\"\n" + 
+				"                                FROM\n" + 
+				"                                    \"TATRAN6\".\"HAS_SKILL\"   \"HAS_SKILL\",\n" + 
+				"                                    \"TATRAN6\".\"REQUIRES\"    \"REQUIRES\"\n" + 
+				"                                WHERE\n" + 
+				"                                    \"HAS_SKILL\".\"SK_CODE\" = \"REQUIRES\".\"SK_CODE\"\n" + 
+				"                            ) \"from$_subquery$_004\"\n" + 
+				"                        WHERE\n" + 
+				"                            \"from$_subquery$_004\".\"POS_CODE\" = ?\n" + 
+				"                        GROUP BY\n" + 
+				"                            \"from$_subquery$_004\".\"PER_ID\"\n" + 
+				"                    ) \"A3\"\n" + 
+				"            ) \"A2\"\n" + 
+				"    )";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		PreparedStatement pStmt = conn.prepareStatement(str);
+		pStmt.setString(1, pos_code);
+		pStmt.setString(2, pos_code);
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			String[] line = new String[2];
+			line[0] = rs.getString("per_id");
+			line[1] = Integer.toString(rs.getInt("amount"));
+			al.add(line);
+		}
+		return al;
+	}
+	
+	/**
+	 * Query 24
+	 * @param pos_code
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<String[]> queryTwentyFour(String pos_code) throws SQLException {
+		String str = "SELECT\n" + 
+				"    COUNT(\"A1\".\"PER_ID\") \"COUNT(PER_ID)\",\n" + 
+				"    \"A1\".\"SK_CODE\" \"SK_CODE\"\n" + 
+				"FROM\n" + 
+				"    (\n" + 
+				"        ( SELECT\n" + 
+				"            \"A5\".\"PER_ID\"    \"PER_ID\",\n" + 
+				"            \"A4\".\"SK_CODE\"   \"SK_CODE\"\n" + 
+				"        FROM\n" + 
+				"            (\n" + 
+				"                SELECT\n" + 
+				"                    \"A6\".\"PER_ID\" \"PER_ID\"\n" + 
+				"                FROM\n" + 
+				"                    (\n" + 
+				"                        SELECT\n" + 
+				"                            \"A8\".\"PER_ID\" \"PER_ID\",\n" + 
+				"                            (\n" + 
+				"                                SELECT\n" + 
+				"                                    COUNT(\"A9\".\"SK_CODE\") \"COUNT(SK_CODE)\"\n" + 
+				"                                FROM\n" + 
+				"                                    \"TATRAN6\".\"REQUIRES\" \"A9\"\n" + 
+				"                                WHERE\n" + 
+				"                                    \"A9\".\"POS_CODE\" = ?\n" + 
+				"                            ) - COUNT(\"A8\".\"PER_ID\") \"AMOUNT\"\n" + 
+				"                        FROM\n" + 
+				"                            (\n" + 
+				"                                SELECT\n" + 
+				"                                    \"A10\".\"SK_CODE\"    \"SK_CODE\",\n" + 
+				"                                    \"A11\".\"PER_ID\"     \"PER_ID\",\n" + 
+				"                                    \"A10\".\"POS_CODE\"   \"POS_CODE\"\n" + 
+				"                                FROM\n" + 
+				"                                    \"TATRAN6\".\"HAS_SKILL\"   \"A11\",\n" + 
+				"                                    \"TATRAN6\".\"REQUIRES\"    \"A10\"\n" + 
+				"                                WHERE\n" + 
+				"                                    \"A11\".\"SK_CODE\" = \"A10\".\"SK_CODE\"\n" + 
+				"                            ) \"A8\"\n" + 
+				"                        WHERE\n" + 
+				"                            \"A8\".\"POS_CODE\" = ?\n" + 
+				"                        GROUP BY\n" + 
+				"                            \"A8\".\"PER_ID\"\n" + 
+				"                    ) \"A6\"\n" + 
+				"                WHERE\n" + 
+				"                    \"A6\".\"AMOUNT\" < 4\n" + 
+				"            ) \"A5\",\n" + 
+				"            (\n" + 
+				"                SELECT\n" + 
+				"                    \"A7\".\"SK_CODE\" \"SK_CODE\"\n" + 
+				"                FROM\n" + 
+				"                    \"TATRAN6\".\"REQUIRES\" \"A7\"\n" + 
+				"                WHERE\n" + 
+				"                    \"A7\".\"POS_CODE\" = ?\n" + 
+				"            )                                                                                                                                                                                                                                                                                                                                                              \"A4\"\n" + 
+				"        )\n" + 
+				"        MINUS\n" + 
+				"        ( SELECT\n" + 
+				"            \"A3\".\"PER_ID\"    \"PER_ID\",\n" + 
+				"            \"A3\".\"SK_CODE\"   \"SK_CODE\"\n" + 
+				"        FROM\n" + 
+				"            \"TATRAN6\".\"HAS_SKILL\" \"A3\"\n" + 
+				"        )\n" + 
+				"    ) \"A1\"\n" + 
+				"GROUP BY\n" + 
+				"    \"A1\".\"SK_CODE\"\n" + 
+				"ORDER BY\n" + 
+				"    COUNT(\"A1\".\"PER_ID\")";
+		ArrayList<String[]> al = new ArrayList<String[]>();
+		PreparedStatement pStmt = conn.prepareStatement(str);
+		pStmt.setString(1, pos_code);
+		pStmt.setString(2, pos_code);
+		pStmt.setString(3, pos_code);
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			String[] line = new String[2];
+			line[0] = Integer.toString(rs.getInt("COUNT(per_id)"));
+			line[1] = rs.getString("sk_code");
 			al.add(line);
 		}
 		return al;
@@ -582,7 +839,7 @@ public class QueryLD {
 						System.out.println("SUM(num_employed)\t\temployer");
 						ArrayList<String[]> str = sqObj.querySeventeenA();
 						for (String[] line : str) {
-							System.out.printf("%s\t\t\t\t%s\n\n", line[0],line[1]);
+							System.out.printf("%s\t\t\t\t%s\n\n", line[0], line[1]);
 						}
 					} else if (part.equalsIgnoreCase("B")) {
 						System.out.println("Running Query 17 B");
@@ -603,6 +860,81 @@ public class QueryLD {
 					} else {
 						System.out.println("ERROR >>> selction choise invaild");
 					}
+				} else if (choice == 18) {
+					System.out.println("Running Query 18");
+					System.out.println(
+							"Find out the job distribution among industries by showing the number of employees in each industry.");
+					System.out.println("SUM(num_workers)\t\tparent_id");
+					ArrayList<String[]> str = sqObj.queryEightteen();
+					for (String[] line : str) {
+						System.out.printf("%s\t\t%s\n\n", line[0], line[1]);
+					}
+				} else if (choice == 19) {
+
+				} else if (choice == 20) {
+					System.out.println("Running Query 20");
+					System.out.println(
+							"Given a person’s identifier, find the job position with the highest pay rate for this person according to his/her skill possession.");
+					System.out.println("Enter a person ID: ");
+					String ans = getAnswerString();
+					System.out.println("title\t\t\tjob_code\t\tSUM(pay_rate)");
+					ArrayList<String[]> str = sqObj.queryTwenty(ans);
+					for (String[] line : str) {
+						System.out.printf("%s\t\t%s\t\t%s\n\n", line[0], line[1], line[2]);
+					}
+				} else if (choice == 21) {
+					System.out.println("Running Query 21");
+					System.out.println(
+							"Given a position code, list all the names along with the emails of the persons who are qualified for this position.");
+					System.out.println("Enter a position code: ");
+					String ans = getAnswerString();
+					System.out.println("first_name\t\temail");
+					ArrayList<String[]> str = sqObj.queryTwentyOne(ans);
+					for (String[] line : str) {
+						System.out.printf("%s\t\t%s\n\n", line[0], line[1]);
+					}
+				} else if (choice == 22) {
+					System.out.println("Running Query 22");
+					System.out.println(
+							"When a company cannot find any qualified person for a job position, a secondary solution is to find a person who is almost qualified to the job position. Make a “missing-k” list that lists people who miss only k skills for a specified pos_code; k < 4. ");
+					System.out.println("Enter position code for gathering all skill: ");
+					String ans1 = getAnswerString();
+					System.out.println("Enter position code for position with specific skills: ");
+					String ans2 = getAnswerString();
+					System.out.println("per_id\t\tjob_code");
+					ArrayList<String[]> str = sqObj.queryTwentyTwo(ans1, ans2);
+					for (String[] line : str) {
+						System.out.printf("%s\t\t%s\n\n",line[0],line[1]);
+					}
+				} else if (choice == 23) {
+					System.out.println("Running Query 23");
+					System.out.println("Suppose there is a new position that has nobody qualified. List the persons who miss the least number of skills that\n" + 
+							"are required by this pos_code and report the “least number\"");
+					System.out.println("Enter a position code: ");
+					String ans = getAnswerString();
+					System.out.println("per_id\t\tamount");
+					ArrayList<String[]> str = sqObj.queryTwentyThree(ans);
+					for (String[] line : str) {
+						System.out.printf("%s\t\t%s\n\n",line[0], line[1]);
+					}
+				} else if (choice == 24) {
+					System.out.println("Running Query 24");
+					System.out.println("List each of the skill code and the number of people who misses the skill and are in the missing-k list for a given  position code in the ascending order of the people counts. ");
+					System.out.println("Enter a position code: ");
+					String ans = getAnswerString();
+					System.out.println("COUNT(per_id)\t\tsk_code");
+					ArrayList<String[]> str = sqObj.queryTwentyFour(ans);
+					for (String[] line : str) {
+						System.out.printf("%s\t\t\t%s\n\n",line[0], line[1]);
+						}
+				} else if (choice == 25) {
+
+				} else if (choice == 26) {
+
+				} else if (choice == 27) {
+
+				} else if (choice == 28) {
+
 				}
 				// This else is to check if use want to QUIT
 				else if (choice == 0) {
